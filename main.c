@@ -52,9 +52,9 @@ void	free_map(t_hash_map *map)
 
 void	ft_read_input(t_hash_map *map)
 {
-	char *key;
-	char *value;
-	char *line;
+	char	*key;
+	char	*value;
+	char	*line;
 
 	while (1)
 	{
@@ -62,9 +62,9 @@ void	ft_read_input(t_hash_map *map)
 		value = NULL;
 		line = new_get_line();
 		if (!line)
-			break;
+			break ;
 		if (line[0] == '\n')
-           break;
+			break ;
 		key = line;
 		value = new_get_line();
 		if (key && value)
@@ -100,33 +100,33 @@ void	ft_read_input(t_hash_map *map)
 
 static void	search_keys(t_hash_map *map)
 {
-    char			*to_search;
-    unsigned int	search_len;
-    char			*result;
+	char			*to_search;
+	unsigned int	search_len;
+	char			*result;
 
-    while ((to_search = get_next_line(0)))
-    {
-        if (to_search[0] == '\0')
-            return (free(to_search), (void)0);
-        search_len = ft_strlen(to_search);
-        result = get(map, to_search, search_len);
-        if (result)
-            ft_putstr(result, ft_strlen(result));
-        else
-            ft_putstr(to_search, search_len), write(1, ": Not found.\n", 13);
-        free(to_search);
-    }
+	while ((to_search = new_get_line()))
+	{
+		if (to_search[0] == '\0')
+			return (free(to_search), (void)0);
+		search_len = ft_strlen(to_search);
+		result = get(map, to_search, search_len);
+		if (result)
+			ft_putstr(result, ft_strlen(result));
+		else
+			ft_putstr(to_search, search_len), write(1, ": Not found.\n", 13);
+		free(to_search);
+	}
 }
 
 int	main(void)
 {
-    t_hash_map	*map;
+	t_hash_map	*map;
 
-    map = create_map(1048583);
-    if (!map)
-        return (1);
-    ft_read_input(map);
-    search_keys(map);
-    free_map(map);
-    return (0);
+	map = create_map(1048583);
+	if (!map)
+		return (1);
+	ft_read_input(map);
+	search_keys(map);
+	free_map(map);
+	return (0);
 }

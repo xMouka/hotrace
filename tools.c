@@ -1,26 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbalyout <fbalyout@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/20 18:25:24 by fbalyout          #+#    #+#             */
+/*   Updated: 2025/04/20 18:25:25 by fbalyout         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "hot_race.h"
 
 int	ft_strlen(const char *string)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	while (string[i++]) ;
+	while (string[i++])
+		;
 	return (i);
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (*s1 != *s2)
-		return (*s1 - *s2);
-	if (!*s1)
-		return (0);
-	if (*(s1 + 1) != *(s2 + 1))
-		return (*(s1 + 1) - *(s2 + 1));
-	if (!*(s1 + 1))
-		return (0);
-	s1 += 2;
-	s2 += 2;
 	while (*s1 && (*s1 == *s2))
 	{
 		s1++;
@@ -50,9 +53,7 @@ unsigned int	ft_sqrt(unsigned int x)
 			start = mid + 1;
 		}
 		else
-		{
 			end = mid - 1;
-		}
 	}
 	return (ans);
 }
@@ -69,10 +70,12 @@ int	is_prime(unsigned int n)
 	if (n % 2 == 0 || n % 3 == 0)
 		return (0);
 	sqrt_n = ft_sqrt(n);
-	for (i = 5; i <= sqrt_n; i += 6)
+	i = 5;
+	while (i <= sqrt_n)
 	{
 		if (n % i == 0 || n % (i + 2) == 0)
 			return (0);
+		i += 6;
 	}
 	return (1);
 }
@@ -84,10 +87,6 @@ unsigned int	next_prime(unsigned int n)
 	if (n % 2 == 0)
 		n++;
 	while (!is_prime(n))
-	{
 		n += 2;
-	}
 	return (n);
 }
-
-

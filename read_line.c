@@ -6,7 +6,7 @@
 /*   By: fbalyout <fbalyout@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 14:08:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2025/04/20 17:32:12 by fbalyout         ###   ########.fr       */
+/*   Updated: 2025/04/20 18:24:50 by fbalyout         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,25 @@ ssize_t	refill_buffer(t_buffer_ctx *ctx)
 	return (ctx->len);
 }
 
-void    *ft_realloc(void *ptr, size_t old_size, size_t new_size)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-    void    *new_ptr;
+	void	*new_ptr;
 
-    if (new_size == 0)
-    {
-        free(ptr);
-        return (NULL);
-    }
-    if (ptr == NULL)
-        return (malloc(new_size));
-    if (new_size <= old_size)
-        return (ptr);
-    new_ptr = malloc(new_size);
-    if (new_ptr == NULL)
-        return (NULL);
-    ft_memcpy(new_ptr, ptr, old_size);
-    free(ptr);
-    return (new_ptr);
+	if (new_size == 0)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	if (ptr == NULL)
+		return (malloc(new_size));
+	if (new_size <= old_size)
+		return (ptr);
+	new_ptr = malloc(new_size);
+	if (new_ptr == NULL)
+		return (NULL);
+	ft_memcpy(new_ptr, ptr, old_size);
+	free(ptr);
+	return (new_ptr);
 }
 
 int	ensure_capacity(char **line, size_t *alloc, ssize_t line_len)
@@ -45,7 +45,7 @@ int	ensure_capacity(char **line, size_t *alloc, ssize_t line_len)
 	size_t	new_alloc;
 	char	*tmp;
 
-	if (line_len + 1 >= (ssize_t) * alloc)
+	if (line_len + 1 >= (ssize_t)*alloc)
 	{
 		new_alloc = (*alloc) * 2;
 		tmp = ft_realloc(*line, *alloc, new_alloc);
@@ -101,5 +101,3 @@ char	*new_get_line(void)
 		return (free(state.line), NULL);
 	return (state.line[state.line_len] = '\0', state.line);
 }
-
-

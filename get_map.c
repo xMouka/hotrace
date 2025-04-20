@@ -4,8 +4,8 @@ void	*get(t_hash_map *map, char *key, unsigned int key_len)
 {
 	unsigned int	attempts;
 	unsigned int	max_attempts;
-	unsigned long idx;
-	unsigned long step;
+	unsigned long	idx;
+	unsigned long	step;
 
 	attempts = 0;
 	if (!map || !key || map->size == 0)

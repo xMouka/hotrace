@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbalyout <fbalyout@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/20 18:25:21 by fbalyout          #+#    #+#             */
+/*   Updated: 2025/04/20 18:25:22 by fbalyout         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "hot_race.h"
 
 char	*ft_strdup(const char *str)
@@ -13,7 +25,7 @@ char	*ft_strdup(const char *str)
 	dest = result;
 	while ((*dest++ = *str++))
 		;
-	return result;
+	return (result);
 }
 
 char	*ft_strdup_len(const char *str, int len)
@@ -24,16 +36,16 @@ char	*ft_strdup_len(const char *str, int len)
 
 	result = malloc(len + 1);
 	if (!result)
-		return NULL;
+		return (NULL);
 	dest = result;
-    i = 0;
-    while (i < len)
-    {
+	i = 0;
+	while (i < len)
+	{
 		dest[i] = str[i];
-        i++;
-    }
+		i++;
+	}
 	dest[len] = '\0';
-	return result;
+	return (result);
 }
 
 void	ft_putstr(const char *str, int len)
@@ -44,34 +56,39 @@ void	ft_putstr(const char *str, int len)
 unsigned long	hash1(const char *str, int len)
 {
 	unsigned long		hash;
-	const unsigned char	*s = (const unsigned char *)str;
+	const unsigned char	*s;
 	int					i;
 
+	s = (const unsigned char *)str;
 	hash = 0x811C9DC5;
-	for (i = 0; i < len; i++)
+	i = 0;
+	while (i < len)
 	{
 		hash ^= s[i];
 		hash *= 0x01000193;
+		i++;
 	}
-	return hash;
+	return (hash);
 }
 
 unsigned long	hash2(const char *str, int len, unsigned int prime)
 {
-	unsigned long hash = 0;
-	const unsigned char *s = (const unsigned char *)str;
-	int i;
+	unsigned long		hash;
+	const unsigned char	*s;
+	int					i;
 
-	for (i = 0; i < len; i++)
+	hash = 0;
+	s = (const unsigned char *)str;
+	i = 0;
+	while (i < len)
 	{
 		hash += s[i];
 		hash += (hash << 10);
 		hash ^= (hash >> 6);
+		i++;
 	}
-
 	hash += (hash << 3);
 	hash ^= (hash >> 11);
 	hash += (hash << 15);
-
-	return (hash % prime) | 1;
+	return ((hash % prime) | 1);
 }
